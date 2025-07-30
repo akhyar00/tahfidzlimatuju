@@ -1,6 +1,9 @@
 <?php
 // bootstrap/vercel.php
 
+// Load Composer autoloader first
+require_once __DIR__.'/../vendor/autoload.php';
+
 // Set paths for Vercel
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/views';
 $_ENV['APP_STORAGE'] = '/tmp';
