@@ -74,4 +74,13 @@ Route::middleware('admin.auth')->group(function () {
     // ... route absensi lainnya
     Route::post('/absensi/hapus-semua', [AbsensiController::class, 'hapusSemua'])->name('absensi.hapus_semua');
     Route::post('/hafalan/hapus-semua', [HafalanController::class, 'hapusSemua'])->name('hafalan.hapus_semua');
+    Route::get('/jalankan-migrasi-vercel', function () {
+    try {
+        // Menjalankan perintah untuk mereset dan mengisi database
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+        return 'SUCCESS: Database has been reset and seeded.';
+    } catch (\Exception $e) { 
+        return 'ERROR: ' . $e->getMessage(); 
+    }
+});
 });
