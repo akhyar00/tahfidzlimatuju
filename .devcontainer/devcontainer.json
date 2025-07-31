@@ -1,13 +1,21 @@
 {
-    "name": "Laravel",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-    "features": {
-        "ghcr.io/devcontainers/features/php:1": {
-            "version": "8.3"
-        },
-        "ghcr.io/devcontainers/features/node:1": {
-            "version": "lts"
-        }
+  "name": "Laravel Development",
+  "image": "mcr.microsoft.com/devcontainers/php:8.3",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
     },
-    "postCreateCommand": "composer install"
+    "ghcr.io/devcontainers/features/composer:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "forwardPorts": [8000, 3000, 5173]
 }
