@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Tentukan apakah kita sedang berjalan di Vercel
+// Cek apakah sedang berjalan di Vercel
 if (isset($_ENV['VERCEL'])) {
     // Jika YA, gunakan file bootstrap khusus Vercel
     require_once __DIR__.'/../bootstrap/vercel.php';
