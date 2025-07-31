@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: aplikasi-tahfidz
+    env: php
+    buildCommand: |
+      composer install
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+    startCommand: heroku-php-apache2 public/
