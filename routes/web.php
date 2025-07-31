@@ -1,9 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SantriController;
@@ -20,7 +17,7 @@ use App\Http\Controllers\PublicController;
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/santri/{id}/progres', [PublicController::class, 'showSantriProgress'])->name('santri.progres.publik');
 
-// ROUTE SEMENTARA UNTUK MIGRASI DATABASE DI VERCEL
+// RUTE SEMENTARA UNTUK MIGRASI DATABASE (HAPUS SETELAH DIGUNAKAN)
 Route::get('/setup-database', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
@@ -37,10 +34,6 @@ Route::get('/setup-database', function () {
 */
 Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.submit');
-Route::get('/logout-manual', function () {
-    Session::flush();
-    return 'Sesi Anda telah dihapus. Silakan kembali ke halaman login.';
-});
 
 /*
 |--------------------------------------------------------------------------

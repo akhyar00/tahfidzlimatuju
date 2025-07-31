@@ -4,20 +4,15 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Cek apakah sedang berjalan di Vercel
+// Tentukan apakah kita sedang berjalan di Vercel
 if (isset($_ENV['VERCEL'])) {
     // Jika YA, gunakan file bootstrap khusus Vercel
-    $app = require_once __DIR__.'/../bootstrap/vercel.php';
-} else {
-    // Jika TIDAK (di Codespaces), gunakan file bootstrap normal
-    $app = require_once __DIR__.'/../bootstrap/app.php';
+    require_once __DIR__.'/../bootstrap/vercel.php';
 }
 
-// Kode di bawah ini menangani permintaan masuk
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+// Register Composer autoloader
+require __DIR__.'/../vendor/autoload.php';
 
-$response = $kernel->handle(
-    $request = Request::capture()
-)->send();
-
-$kernel->terminate($request, $response);
+// Bootstrap Laravel dan tangani permintaan
+(require_once __DIR__.'/../bootstrap/app.php')
+    ->handleRequest(Request::capture());
